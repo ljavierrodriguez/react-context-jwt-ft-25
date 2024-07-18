@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../store/AppContext'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
     const { store, actions } = useContext(Context)
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         if (store.access_token !== null) {
             actions.getProfile()
+        } else {
+            navigate('/sign-in')
         }
     }, [store.access_token])
 
